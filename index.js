@@ -1,5 +1,5 @@
 'use strict'
-/* ___________________ Stock API ___________________ */
+/* ___________________ STOCK API ___________________ */
 const express = require('express')
 const app = express()
 
@@ -9,9 +9,19 @@ const PORT = process.env?.PORT || 8000;
 
 require('express-async-errors')
 
-// Connection 
+/* _________________ Connection _________________ */
 const {dbConnection} = require('./src/configs/dbConnection')
 dbConnection()
+
+/* __________________ Middlewares __________________ */
+
+app.use(express.json())
+
+app.use(require('./src/middlewares/logger'))
+
+app.use(require('./src/middlewares/queryHandler'))
+
+/* _____________________ Routes ____________________ */
 
 app.all("/", (req, res) => {
 	res.send({
@@ -20,6 +30,11 @@ app.all("/", (req, res) => {
 	});
 });
 
-/* ______________________________________________ */
+app.use(require('./src/routes'))
+
+/* _____________________ OTHERS ____________________ */
+
+app.use(require('./src/middlewares/errorHandler'));
+
 app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`));
 // require('./src/helpers/sync'); 

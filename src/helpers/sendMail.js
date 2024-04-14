@@ -4,6 +4,8 @@ const nodemailer = require('nodemailer')
 
 module.exports = function(to, subject, message) {
 
+    return null; // this service for real time application !
+
     //? GoogleMail (gmail):
     const transporter = nodemailer.createTransport({
 		service: "gmail",

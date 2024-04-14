@@ -22,3 +22,4 @@ app.all("/", (req, res) => {
 
 /* ______________________________________________ */
 app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`));
+// require('./src/helpers/sync'); 

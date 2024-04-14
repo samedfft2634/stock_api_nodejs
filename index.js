@@ -27,6 +27,11 @@ app.all("/", (req, res) => {
 	res.send({
 		error: false,
 		message: "Welcome to STOCK API",
+		docs: {
+			swagger: "/documents/swagger",
+			redoc: "/documents/redoc",
+			json: "/documents/json",
+		},
 	});
 });
 
@@ -38,3 +43,4 @@ app.use(require('./src/middlewares/errorHandler'));
 
 app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`));
 // require('./src/helpers/sync'); 
+// node swaggerAutogen.js => for swagger Documentations

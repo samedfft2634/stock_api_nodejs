@@ -17,6 +17,10 @@ dbConnection()
 
 app.use(express.json())
 
+app.use('/upload', express.static('./upload'))
+
+app.use(require('./src/middlewares/authentication'))
+
 app.use(require('./src/middlewares/logger'))
 
 app.use(require('./src/middlewares/queryHandler'))
@@ -32,6 +36,7 @@ app.all("/", (req, res) => {
 			redoc: "/documents/redoc",
 			json: "/documents/json",
 		},
+		user: req.user
 	});
 });
 
@@ -42,5 +47,5 @@ app.use(require('./src/routes'))
 app.use(require('./src/middlewares/errorHandler'));
 
 app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`));
-// require('./src/helpers/sync'); 
+// require('./src/helpers/sync')(); 
 // node swaggerAutogen.js => for swagger Documentations

@@ -2,18 +2,19 @@
 /* __________________ User Router __________________ */
 const router = require('express').Router();
 
+const { isAdmin, isLogin } = require("../middlewares/permissions");
 const {list, create, read, update, delete:deleteUser} = require('../controllers/user')
 
 // URL: /users
 
 router.route('/')
-.get(list)
+.get(isLogin, list)
 .post(create)
 
 router.route('/:id')
-.get(read)
-.put(update)
-.patch(update)
-.delete(deleteUser)
+.get(isLogin, read)
+.put(isLogin, update)
+.patch(isLogin, update)
+.delete(isAdmin, deleteUser)
 
 module.exports = router

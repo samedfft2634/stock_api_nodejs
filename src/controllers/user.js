@@ -1,25 +1,33 @@
 "use strict";
 /* ________________ User Controller ________________ */
+
 const User = require("../models/user");
+const Token = require("../models/token");
+const passwordEncrypt = require("../helpers/passwordEncrypt");
+
 module.exports = {
 	list: async (req, res) => {
 		/*
             #swagger.tags = ["Users"]
             #swagger.summary = "List Users"
             #swagger.description = `
-                You can send query with endpoint for search[], sort[], page and limit.
+                You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.
                 <ul> Examples:
                     <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>
                     <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>
-                    <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>
-                    <li>URL/?<b>page=2&limit=1</b></li>
+                    <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>
+                    <li>URL/?<b>limit=10&page=1</b></li>
                 </ul>
             `
         */
-		const data = await res.getModelList(User);
+
+		const customFilters = req.user?.isAdmin ? {} : { _id: req.user._id };
+
+		const data = await res.getModelList(User, customFilters);
+
 		res.status(200).send({
 			error: false,
-			details: await res.getModelList(User),
+			details: await res.getModelList(User, customFilters),
 			data,
 		});
 	},
@@ -35,18 +43,13 @@ module.exports = {
                     "username": "test",
                     "password": "1234",
                     "email": "test@site.com",
-                    "isActive": true,
-                    "isStaff": false,
-                    "isAdmin": false,
+                    "firstName": "test",
+                    "lastName": "test",
                 }
             }
         */
-		// req.body.isStaff = false;
-		req.body.isAdmin = false;
 
-		const data = await User.create(req.body);
-
-		/* SendMail *
+            	/* SendMail *
         sendMail(
             data.email, 
             'Welcome', 
@@ -56,35 +59,45 @@ module.exports = {
             `
         )
         */
+        
+		req.body.isStaff = false;
+		req.body.isAdmin = false;
+
+		const data = await User.create(req.body);
+
+		/* Auto Login */
+		const tokenData = await Token.create({
+			userId: data._id,
+            token:passwordEncrypt(data._id + Date.now())
+		});
+		/* Auto Login */
 
 		res.status(201).send({
 			error: false,
+            token:tokenData?.token,
 			data,
-			message: "User Created Successfully!",
 		});
 	},
 
 	read: async (req, res) => {
-		/*
+        /*
             #swagger.tags = ["Users"]
             #swagger.summary = "Get Single User"
         */
 
-		let customFilter = { _id: req.params.id };
+	    const customFilters = req.user?.isAdmin ? {_id:req.params.id} : { _id: req.user._id };
+        
+        const data = await User.findOne(customFilters)
 
-		if (!req.user.isAdmin && !req.user.isStaff) {
-			customFilter = { _id: req.user._id };
-		}
-
-		const data = await User.findOne(customFilter);
         res.status(200).send({
             error:false,
             data,
         })
-	},
+
+    },
 
 	update: async (req, res) => {
-         /*
+        /*
             #swagger.tags = ["Users"]
             #swagger.summary = "Update User"
             #swagger.parameters['body'] = {
@@ -94,31 +107,25 @@ module.exports = {
                     "username": "test",
                     "password": "1234",
                     "email": "test@site.com",
-                    "isActive": true,
-                    "isStaff": false,
-                    "isAdmin": false,
+                    "firstName": "test",
+                    "lastName": "test",
                 }
             }
         */
 
-        // Check Admin
-        if(!req.user.isAdmin){
-            delete req.body.isStaff
-            delete req.body.isAdmin
+        const customFilters = req.user?.isAdmin  ? {_id:req.params.id} : { _id: req.user._id };
+
+        if(!req.user.isAdmin) {
+                delete req.body.isStaff; 
+                delete req.body.isAdmin;
         }
+        (req.user.isAdmin) && delete req.body.isAdmin; 
 
-        // Check Owner
-        let customFilter = {_id:req.params.id}
-        if(!req.user.isAdmin && !req.user.isStaff){
-            customFilter = {_id:req.user._id}
-        }
-
-        const data = await User.updateOne(customFilter, req.body, { runValidators: true })
-
+        const data = await User.updateOne(customFilters, req.body, {runValidators:true})
         res.status(202).send({
-            error:false,
+            error: false,
             data,
-            new:await User.findOne({_id:req.params.id})
+            new: await User.findOne(customFilters)
         })
     },
 
@@ -127,12 +134,23 @@ module.exports = {
             #swagger.tags = ["Users"]
             #swagger.summary = "Delete User"
         */
+      
+            // Allows admin to delete others.
+        if (req.params.id != req.user._id) {
 
-            const data = await User.deleteOne({_id:req.params.id})
+        const data = await User.deleteOne({_id:req.params.id})
+        
+        res.status(data.deletedCount ? 204 : 404).send({
+            error:!data.deletedCount,
+            data,
+        })
+        } else {
 
-            res.status(data.deletedCount ? 204 : 404).send({
-                error:!data.deletedCount,
-                data,
-            })
+            // Admin or user can not delete themselves.
+            res.errorStatusCode = 403
+            throw new Error("You can not remove your account!")
+        }
+
+        
     },
 };

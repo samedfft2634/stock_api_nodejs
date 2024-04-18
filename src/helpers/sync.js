@@ -194,7 +194,7 @@ module.exports = async function () {
         "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 245/A, 34396 Sarıyer/İstanbul, Türkiye"
     })
 
-    /* Product *
+    /* Product */
     const Product = require('../models/product')
     await Product.deleteMany() // !!! Clear collection.
     await Product.create({
@@ -233,7 +233,7 @@ module.exports = async function () {
         "quantity": 0
     })
 
-    /* Purchase *
+    /* Purchase */
     const Purchase = require('../models/purchase')
     await Purchase.deleteMany() // !!! Clear collection.
     await Purchase.create({

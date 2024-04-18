@@ -19,6 +19,8 @@ router.use('/categories', require('./category'))
 router.use('/firms', require('./firm'))
 // product:
 router.use('/products', require('./product'))
+// purchase:
+router.use('/purchases', require('./purchase'))
 
 //document:
 router.use('/documents',require('./document'))

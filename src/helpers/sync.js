@@ -107,7 +107,7 @@ module.exports = async function () {
         "image": "https://www.tailorbrands.com/wp-content/uploads/2021/01/apple_logo_1988.jpg"
     })
 
-    /* Category *
+    /* Category */
     const Category = require('../models/category')
     await Category.deleteMany() // !!! Clear collection.
     await Category.create({

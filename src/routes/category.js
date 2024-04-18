@@ -7,11 +7,21 @@ const {list, create, read, update, delete:deleteCategory} = require('../controll
 
 // URL: /categories
 
+/*
 router.route('/')
-.get(isStaff, list)
+// .get(isStaff, list)
+.get(isStaff, read)
 .post(isAdmin, create)
 
 router.route('/:id')
+.get(isStaff, read)
+.put(isAdmin, update)
+.patch(isAdmin, update)
+.delete(isAdmin, deleteCategory)
+*/
+
+router.route('/(:id)?') 
+.post(isAdmin, create)
 .get(isStaff, read)
 .put(isAdmin, update)
 .patch(isAdmin, update)

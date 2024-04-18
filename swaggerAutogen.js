@@ -37,10 +37,14 @@ const document = {
 	},
 	security: [{ Token: [] }, { Bearer: [] }],
 	definitions: {
-		// Models:{
-		// 	"Token": require('./src/models/token').schema.obj,
-		// 	"User": require('./src/models/user').schema.obj,
-		// }
+		Models:{
+			"Token": require('./src/models/token').schema.obj,
+			"User": require('./src/models/user').schema.obj,
+			"Brand": require('./src/models/user').schema.obj,
+			"Category": require('./src/models/user').schema.obj,
+			"Firm": require('./src/models/user').schema.obj,
+			"Product": require('./src/models/user').schema.obj,
+		}
 	}
 }
 

@@ -17,7 +17,11 @@ router.use('/brands', require('./brand'))
 router.use('/categories', require('./category'))
 // firm:
 router.use('/firms', require('./firm'))
+// product:
+router.use('/products', require('./product'))
 
+//document:
+router.use('/documents',require('./document'))
 
 
 /* ______________________________________________ */

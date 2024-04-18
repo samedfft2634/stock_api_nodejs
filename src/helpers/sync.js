@@ -48,7 +48,7 @@ module.exports = async function () {
         "isAdmin": false
     })
 
-    /* Brand *
+    /* Brand */
     const Brand = require('../models/brand')
     await Brand.deleteMany() // !!! Clear collection.
     await Brand.create({

@@ -5,7 +5,7 @@ module.exports = async function () {
 
     // return null;
 
-    /* REMOVE DATABASE *
+    /* REMOVE DATABASE */
     const { mongoose } = require('../configs/dbConnection')
     await mongoose.connection.dropDatabase()
     console.log('- Database and all data DELETED!')
@@ -239,7 +239,7 @@ module.exports = async function () {
     await Purchase.create({
         "_id": "65343222b67e9681f937f513",
         "userId": "65343222b67e9681f937f001",
-        "firm_id": "65343222b67e9681f937f304",
+        "firmId": "65343222b67e9681f937f304",
         "brandId": "65343222b67e9681f937f123",
         "productId": "65343222b67e9681f937f422",
         "quantity": 1000,
@@ -248,7 +248,7 @@ module.exports = async function () {
     await Purchase.create({
         "_id": "65343222b67e9681f937f514",
         "userId": "65343222b67e9681f937f001",
-        "firm_id": "65343222b67e9681f937f304",
+        "firmId": "65343222b67e9681f937f304",
         "brandId": "65343222b67e9681f937f123",
         "productId": "65343222b67e9681f937f423",
         "quantity": 1000,
@@ -257,7 +257,7 @@ module.exports = async function () {
     await Purchase.create({
         "_id": "65343222b67e9681f937f516",
         "userId": "65343222b67e9681f937f001",
-        "firm_id": "65343222b67e9681f937f304",
+        "firmId": "65343222b67e9681f937f304",
         "brandId": "65343222b67e9681f937f123",
         "productId": "65343222b67e9681f937f426",
         "quantity": 1000,
@@ -266,7 +266,7 @@ module.exports = async function () {
     await Purchase.create({
         "_id": "65343222b67e9681f937f519",
         "userId": "65343222b67e9681f937f002",
-        "firm_id": "65343222b67e9681f937f333",
+        "firmId": "65343222b67e9681f937f333",
         "brandId": "65343222b67e9681f937f104",
         "productId": "65343222b67e9681f937f422",
         "quantity": 10,
@@ -275,7 +275,7 @@ module.exports = async function () {
     await Purchase.create({
         "_id": "65343222b67e9681f937f520",
         "userId": "65343222b67e9681f937f001",
-        "firm_id": "65343222b67e9681f937f305",
+        "firmId": "65343222b67e9681f937f305",
         "brandId": "65343222b67e9681f937f131",
         "productId": "65343222b67e9681f937f427",
         "quantity": 10,

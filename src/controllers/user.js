@@ -27,7 +27,7 @@ module.exports = {
 
 		res.status(200).send({
 			error: false,
-			details: await res.getModelList(User, customFilters),
+			details: await res.getModelListDetails(User, customFilters),
 			data,
 		});
 	},
@@ -118,6 +118,7 @@ module.exports = {
         if(!req.user.isAdmin) {
                 delete req.body.isStaff; 
                 delete req.body.isAdmin;
+                delete req.body.isActive;
         }
         (req.user.isAdmin) && delete req.body.isAdmin; 
 

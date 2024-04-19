@@ -1,6 +1,7 @@
 "use strict";
 /* ______________ Purchase Controller ______________ */
 const Purchase = require("../models/purchase");
+const Product = require("../models/product");
 
 module.exports = {
 
@@ -17,7 +18,12 @@ module.exports = {
             }
         */
 
+		req.body.userId = req.user._id
+
 		const data = await Purchase.create(req.body);
+
+		const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { quantity: +data.quantity } } )
+
 		res.status(201).send({
 			error: false,
 			data,
@@ -82,6 +88,14 @@ module.exports = {
             }
         */
 
+		if(req.body?.quantity){
+			const currentPurchase = await Purchase.findOne({ _id: req.params.id})
+
+			const difference = req.body.quantity - currentPurchase.quantity
+
+			const updateProduct = await Product.updateOne({ _id: currentPurchase.productId}, { $inc: { quantity: +difference}})
+		}
+
 		const data = await Purchase.updateOne(
 			{ _id: req.params.id },
 			req.body,
@@ -100,7 +114,13 @@ module.exports = {
             #swagger.summary = "Delete Purchase"
         */
 
+		// Quantity, before deleting
+		const currentPurchase = await Purchase.findOne({ _id: req.params.id})
+
 		const data = await Purchase.deleteOne({ _id: req.params.id });
+
+		const updateProduct = await Product.updateOne({ _id: currentPurchase.productId}, { $inc: { quantity: -currentPurchase.quantity}})
+
 		res.status(data.deletedCount ? 204 : 404).send({
 			error: !data.deletedCount,
 			data,

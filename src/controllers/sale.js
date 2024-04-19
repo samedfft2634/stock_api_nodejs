@@ -1,6 +1,7 @@
 "use strict";
 /* ______________ Sale Controller ______________ */
 const Sale = require("../models/sale");
+const Product = require("../models/product");
 
 module.exports = {
 
@@ -17,11 +18,24 @@ module.exports = {
             }
         */
 
-		const data = await Sale.create(req.body);
-		res.status(201).send({
-			error: false,
-			data,
-		});
+		req.body.userId = req.user._id
+
+		const currentProduct = await Product.findOne({ _id: req.body.productId})
+
+		if(currentProduct.quantity >= req.body.quantity){
+			const data = await Sale.create(req.body);
+
+			const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { quantity: -data.quantity } } )
+
+			res.status(201).send({
+				error: false,
+				data,
+			});
+		} else {
+
+		}
+
+		
 	},
 
 	read: async (req, res) => {
@@ -80,6 +94,20 @@ module.exports = {
             }
         */
 
+		if(req.body?.quantity){
+			const currentSale = await Sale.findOne({ _id: req.params.id})
+
+			const difference = req.body.quantity - currentSale.quantity
+
+			const updateProduct = await Product.updateOne({ _id: currentSale.productId, quantity: { $gte: difference} }, { $inc: { quantity: -difference}})
+			// console.log(updateProduct)
+
+			if(updateProduct.modifiedCount == 0){
+				res.errorStatusCode = 422
+				throw new Error('There is not enough product-quantity for this sale.')
+			}
+		}
+
 		const data = await Sale.updateOne(
 			{ _id: req.params.id },
 			req.body,
@@ -98,7 +126,12 @@ module.exports = {
             #swagger.summary = "Delete Sale"
         */
 
+		const currentSale = await Sale.findOne({ _id: req.params.id})
+
 		const data = await Sale.deleteOne({ _id: req.params.id });
+
+		const updateProduct = await Product.updateOne({ _id: currentSale.productId}, { $inc: { quantity: +currentSale.quantity}})
+
 		res.status(data.deletedCount ? 204 : 404).send({
 			error: !data.deletedCount,
 			data,

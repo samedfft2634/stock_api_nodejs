@@ -54,5 +54,14 @@ const SaleSchema = new mongoose.Schema(
 		timestamps: true,
 	}
 );
+/* _______________________ _ _______________________ */
+SaleSchema.pre('init',function(document){
 
+	document.__v = undefined
+	document.createdAtStr = document.createdAt.toLocaleString('tr-tr', { dateStyle: 'full', timeStyle: 'medium'})
+	document.updatedAtStr = document.createdAt.toLocaleString('tr-tr', { dateStyle: 'full', timeStyle: 'medium'})
+	// document.createdAtStr = document.updatedAtStr = undefined
+
+})
+/* _______________________ _ _______________________ */
 module.exports = mongoose.model("Sale", SaleSchema);

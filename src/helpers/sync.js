@@ -203,7 +203,7 @@ module.exports = async function () {
         "categoryId": "65343222b67e9681f937f203",
         "brandId": "65343222b67e9681f937f107",
         "quantity": 0,
-        "price":89.90
+        "price":99.90
     })
     await Product.create({
         "_id": "65343222b67e9681f937f422",
@@ -211,7 +211,7 @@ module.exports = async function () {
         "categoryId": "65343222b67e9681f937f202",
         "brandId": "65343222b67e9681f937f123",
         "quantity": 910,
-        "price":89.90
+        "price":109.90
     })
     await Product.create({
         "_id": "65343222b67e9681f937f423",
@@ -219,7 +219,7 @@ module.exports = async function () {
         "categoryId": "65343222b67e9681f937f202",
         "brandId": "65343222b67e9681f937f123",
         "quantity": 750,
-        "price":89.90
+        "price":79.90
     })
     await Product.create({
         "_id": "65343222b67e9681f937f426",
@@ -235,7 +235,7 @@ module.exports = async function () {
         "categoryId": "65343222b67e9681f937f204",
         "brandId": "65343222b67e9681f937f131",
         "quantity": 0,
-        "price":89.90
+        "price":199.90
     })
 
     /* Purchase */

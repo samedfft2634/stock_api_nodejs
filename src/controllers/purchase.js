@@ -42,7 +42,12 @@ module.exports = {
 		if (req.params?.id) {
             
             // Get Single Purchase
-			const data = await Purchase.findOne({ _id: req.params.id });
+			const data = await Purchase.findOne({ _id: req.params.id }).populate([
+				{path:'userId', select: 'username email'},
+				{path:'firmId', select: 'name image'},
+				'brandId',
+				{path:'productId', select: 'name' ,populate:{path: 'categoryId'}},
+			]);
 			res.status(200).send({
 				error: false,
 				data,
@@ -50,7 +55,12 @@ module.exports = {
 		} else {
 
             // List Purchases
-			const data = await res.getModelList(Purchase);
+			const data = await res.getModelList(Purchase, {}, [
+				{path:'userId', select: 'username email'},
+				{path:'firmId', select: 'name image'},
+				'brandId',
+				{path:'productId', select: 'name' ,populate:{path: 'categoryId'}},
+			]);
 			res.status(200).send({
 				error: false,
 				details: await res.getModelListDetails(Purchase),

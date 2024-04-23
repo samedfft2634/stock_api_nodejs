@@ -1,9 +1,9 @@
 "use strict"
-/* _________________ swaggerAutogen ________________ */
+/* ________________ swaggerAutogenJs _______________ */
 require('dotenv').config()
 const HOST = process.env?.HOST || '127.0.0.1'
 const PORT = process.env?.PORT || 8000
-/* _______________________ - _______________________ */
+
 const swaggerAutogen = require('swagger-autogen')()
 const packageJson = require('./package.json')
 
@@ -12,8 +12,7 @@ const document = {
 		version: packageJson.version,
 		title: packageJson.title,
 		description: packageJson.description,
-		termsOfService: "https://github.com/samedfft2634?tab=repositories/#",
-		contact: { name: packageJson.author, email: "samedfft@gmail.com" },
+		contact: { name: packageJson.author },
 		license: { name: packageJson.license, },
 	},
 	host: `${HOST}:${PORT}`,
@@ -37,19 +36,19 @@ const document = {
 	},
 	security: [{ Token: [] }, { Bearer: [] }],
 	definitions: {
-		Models:{
-			"Token": require('./src/models/token').schema.obj,
-			"User": require('./src/models/user').schema.obj,
-			"Brand": require('./src/models/user').schema.obj,
-			"Category": require('./src/models/user').schema.obj,
-			"Firm": require('./src/models/user').schema.obj,
-			"Product": require('./src/models/user').schema.obj,
-		}
+		// Models:
+		"User": require('./src/models/user').schema.obj,
+		"Brand": require('./src/models/brand').schema.obj,
+		"Category": require('./src/models/category').schema.obj,
+		"Firm": require('./src/models/firm').schema.obj,
+		"Product": require('./src/models/product').schema.obj,
+		"Purchase": require('./src/models/purchase').schema.obj,
+		"Sale": require('./src/models/sale').schema.obj,
 	}
 }
 
 const routes = ['./index.js']
 const outputFile = './src/configs/swagger.json'
-/* _______________________ - _______________________ */
+
 // Create JSON file:
 swaggerAutogen(outputFile, routes, document)

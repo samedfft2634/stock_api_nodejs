@@ -4,10 +4,8 @@
     "version": "1.0.0",
     "title": "REST API",
     "description": "Stock Api",
-    "termsOfService": "https://github.com/samedfft2634?tab=repositories/#",
     "contact": {
-      "name": "",
-      "email": "samedfft@gmail.com"
+      "name": "fentsamed"
     },
     "license": {
       "name": "ISC"
@@ -688,634 +686,684 @@
           }
         }
       }
+    },
+    "/purchases/{(id,isStaff,read}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "(id,isStaff,read",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/purchases/{(id,isAdmin,create}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "(id,isAdmin,create",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/purchases/{(id,isAdmin,update}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "(id,isAdmin,update",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "(id,isAdmin,update",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/purchases/{(id,isAdmin,deletePurchase)module.exports=router}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "(id,isAdmin,deletePurchase)module.exports=router",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/sales/{(id,isStaff,read}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "(id,isStaff,read",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/sales/{(id,isAdmin,create}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "(id,isAdmin,create",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/sales/{(id,isAdmin,update}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "(id,isAdmin,update",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "(id,isAdmin,update",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/sales/{(id,isAdmin,deleteSale)module.exports=router}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "(id,isAdmin,deleteSale)module.exports=router",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "Models": {
+    "User": {
       "type": "object",
       "properties": {
-        "Token": {
+        "username": {
           "type": "object",
           "properties": {
-            "userId": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "ref": {
-                  "type": "string",
-                  "example": "User"
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "index": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
+            "type": {
+              "type": "function"
             },
-            "token": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "index": {
-                  "type": "boolean",
-                  "example": true
-                }
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "unique": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "password": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "set": {
+              "type": "function"
+            }
+          }
+        },
+        "email": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "unique": {
+              "type": "boolean",
+              "example": true
+            },
+            "validate": {
+              "type": "array",
+              "example": [
+                null,
+                "Email type is not correct."
+              ],
+              "items": {
+                "type": "string"
               }
             }
           }
         },
-        "User": {
+        "firstName": {
+          "type": "function"
+        },
+        "lastName": {
+          "type": "function"
+        },
+        "isActive": {
           "type": "object",
           "properties": {
-            "username": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "unique": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
-            },
-            "password": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "set": {
-                  "type": "function"
-                }
-              }
-            },
-            "email": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "unique": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "validate": {
-                  "type": "array",
-                  "example": [
-                    null,
-                    "Email type is not correct."
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "firstName": {
+            "type": {
               "type": "function"
             },
-            "lastName": {
-              "type": "function"
-            },
-            "isActive": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
-            },
-            "isStaff": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
-            },
-            "isAdmin": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+            "default": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
-        "Brand": {
+        "isStaff": {
           "type": "object",
           "properties": {
-            "username": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "unique": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
-            },
-            "password": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "set": {
-                  "type": "function"
-                }
-              }
-            },
-            "email": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "unique": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "validate": {
-                  "type": "array",
-                  "example": [
-                    null,
-                    "Email type is not correct."
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "firstName": {
+            "type": {
               "type": "function"
             },
-            "lastName": {
-              "type": "function"
-            },
-            "isActive": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
-            },
-            "isStaff": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
-            },
-            "isAdmin": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+            "default": {
+              "type": "boolean",
+              "example": false
             }
           }
         },
-        "Category": {
+        "isAdmin": {
           "type": "object",
           "properties": {
-            "username": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "unique": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
-            },
-            "password": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "set": {
-                  "type": "function"
-                }
-              }
-            },
-            "email": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "unique": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "validate": {
-                  "type": "array",
-                  "example": [
-                    null,
-                    "Email type is not correct."
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "firstName": {
+            "type": {
               "type": "function"
             },
-            "lastName": {
+            "default": {
+              "type": "boolean",
+              "example": false
+            }
+          }
+        }
+      }
+    },
+    "Brand": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "properties": {
+            "type": {
               "type": "function"
             },
-            "isActive": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
+            "trim": {
+              "type": "boolean",
+              "example": true
             },
-            "isStaff": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+            "required": {
+              "type": "boolean",
+              "example": true
             },
-            "isAdmin": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+            "unique": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
-        "Firm": {
+        "image": {
           "type": "object",
           "properties": {
-            "username": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "unique": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
-            },
-            "password": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "set": {
-                  "type": "function"
-                }
-              }
-            },
-            "email": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "unique": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "validate": {
-                  "type": "array",
-                  "example": [
-                    null,
-                    "Email type is not correct."
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "firstName": {
+            "type": {
               "type": "function"
             },
-            "lastName": {
+            "trim": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "properties": {
+            "type": {
               "type": "function"
             },
-            "isActive": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
+            "trim": {
+              "type": "boolean",
+              "example": true
             },
-            "isStaff": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+            "required": {
+              "type": "boolean",
+              "example": true
             },
-            "isAdmin": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+            "unique": {
+              "type": "boolean",
+              "example": true
+            },
+            "set": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    },
+    "Firm": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "unique": {
+              "type": "boolean",
+              "example": true
             }
           }
         },
-        "Product": {
+        "phone": {
+          "type": "function"
+        },
+        "address": {
+          "type": "function"
+        },
+        "image": {
+          "type": "function"
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
           "type": "object",
           "properties": {
-            "username": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "unique": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
-            },
-            "password": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "set": {
-                  "type": "function"
-                }
-              }
-            },
-            "email": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "trim": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "unique": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "validate": {
-                  "type": "array",
-                  "example": [
-                    null,
-                    "Email type is not correct."
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "firstName": {
+            "type": {
               "type": "function"
             },
-            "lastName": {
+            "ref": {
+              "type": "string",
+              "example": "Category"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "brandId": {
+          "type": "object",
+          "properties": {
+            "type": {
               "type": "function"
             },
-            "isActive": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": true
-                }
-              }
+            "ref": {
+              "type": "string",
+              "example": "Brand"
             },
-            "isStaff": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "name": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
             },
-            "isAdmin": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "function"
-                },
-                "default": {
-                  "type": "boolean",
-                  "example": false
-                }
-              }
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "price": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "number",
+              "example": 0
+            }
+          }
+        },
+        "quantity": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "number",
+              "example": 0
+            }
+          }
+        }
+      }
+    },
+    "Purchase": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "User"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "firmId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "Firm"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "brandId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "Brand"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "productId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "Product"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "price": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "quantity": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "number",
+              "example": 1
+            }
+          }
+        },
+        "amount": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "set": {
+              "type": "function"
+            },
+            "default": {
+              "type": "function"
+            },
+            "transform": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    },
+    "Sale": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "User"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "brandId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "Brand"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "productId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "Product"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "price": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "quantity": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "number",
+              "example": 1
+            }
+          }
+        },
+        "amount": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "set": {
+              "type": "function"
+            },
+            "default": {
+              "type": "function"
+            },
+            "transform": {
+              "type": "function"
             }
           }
         }

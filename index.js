@@ -21,7 +21,7 @@ dbConnection();
 
 app.use(express.json());
 
-app.use("/upload", express.static("./upload"));
+// app.use("/upload", express.static("./upload"));
 
 app.use(require("cors")());
 
@@ -59,7 +59,7 @@ app.use("*", (req, res) => {
 });
 app.use(require("./src/middlewares/errorHandler"));
 
-app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`));
+app.listen(PORT, () => console.log(`http://${HOST}:${PORT}`));
 
 // if (process.env.NODE_ENV == "development") {
 // 	require("./src/configs/sync")();
